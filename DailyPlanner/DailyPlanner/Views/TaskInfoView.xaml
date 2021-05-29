@@ -1,0 +1,110 @@
+﻿<Window x:Class="DailyPlanner.Views.TaskInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DailyPlanner.Views"
+        mc:Ignorable="d"
+        Title="TaskInfoView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="labelTaskInfo" Grid.Column="0" Grid.Row="0" Content="TaskInfoLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="39" Width="140" FontSize="20"/>
+        <Rectangle HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Height="1" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="800"/>
+
+        <Button Grid.Column="1" Grid.Row="0" x:Name="btnSaveButton" Content="Zapisz" HorizontalAlignment="Right" Width="63"  Click="btnSaveButton_Click" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Tytuł zadania: " HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtTitle" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="694"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Godziny i minuty od: " HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" />
+
+
+        <Grid Grid.Row="3" Grid.Column="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Godzina od"/>
+            <TextBox x:Name="txtHourFrom"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap"  VerticalAlignment="Stretch" />
+
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Minuty od"/>
+            <TextBox x:Name="txtMinuteFrom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+        </Grid>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Godziny i minuty do: " HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" />
+
+
+        <Grid Grid.Row="4" Grid.Column="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Godzina do"/>
+            <TextBox x:Name="txtHourTo" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Minuty do"/>
+            <TextBox x:Name="txtMinuteTo" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+        </Grid>
+
+
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <RadioButton x:Name="radioLow" Grid.Row="0" Grid.Column="0" IsChecked="False" Content="Priorytet niski"/>
+            <RadioButton x:Name="radioNormal" Grid.Row="0" Grid.Column="1" IsChecked="true" Content="Priorytet normalny"/>
+            <RadioButton x:Name="radioHigh" Grid.Row="0" Grid.Column="2" IsChecked="False" Content="Priorytet wysoki"/>
+
+            <CheckBox x:Name="chboxKaizedMode" Grid.Row="1" Grid.Column="3" IsChecked="False" Content="Metoda Kaizen"/>
+
+        </Grid>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Opis zadania :" HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtDescription" Grid.Row="6" Grid.Column="1" Grid.RowSpan="2" >
+            
+        </TextBox>
+
+
+    </Grid>
+</Window>

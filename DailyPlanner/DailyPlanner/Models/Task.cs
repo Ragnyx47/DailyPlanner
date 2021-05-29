@@ -19,8 +19,11 @@ namespace DailyPlanner.Models
 
         public string Description { get; set; }
 
-        public int Hour { get; set; }
-        public int Minute { get; set; }
+        public int HourFrom { get; set; }
+        public int MinuteFrom { get; set; }
+
+        public int HourTo { get; set; }
+        public int MinuteTo { get; set; }
 
         public bool KaizenMode { get; set; }
 

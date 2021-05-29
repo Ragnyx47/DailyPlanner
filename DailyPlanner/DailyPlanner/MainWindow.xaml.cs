@@ -1,5 +1,6 @@
 ﻿using DailyPlanner.Database;
 using DailyPlanner.Models;
+using DailyPlanner.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,18 +37,25 @@ namespace DailyPlanner
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
             TaskContextSingleton.GetInstance().initalizeContext();
 
             TaskCollection taskCollection = TaskContextSingleton.GetInstance().Context.TaskCollections.FirstOrDefault(a => a.DateOfTasks.Date == DateTime.Now.Date);
 
-            taskCollection.Tasks.ToList().ForEach(a =>
+
+            if(taskCollection != null )
             {
-                TaskView g = new TaskView();
-                Frame fr = new Frame();
-                fr.Content = g;
-                panelForTasks.Children.Add(fr);
-            });
-            
+                taskCollection.Tasks.ToList().ForEach(a =>
+                {
+                    TaskView g = new TaskView();
+                    Frame fr = new Frame();
+                    fr.Content = g;
+                    panelForTasks.Children.Add(fr);
+                });
+
+            }
+
+
 
         }
 
@@ -60,6 +68,9 @@ namespace DailyPlanner
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            TaskInfoView taskInfoView = new TaskInfoView();
+            taskInfoView.ShowDialog();
+            /*
             Task t = new Task();
             t.Title = "Zadanie1";
             t.Description = "Desc1";
@@ -90,6 +101,8 @@ namespace DailyPlanner
             }
 
             MessageBox.Show("Poprawnie zapisano");
+            */
+
         }
 
         private void calendar_Loaded(object sender, RoutedEventArgs e)
