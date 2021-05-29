@@ -5,20 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DailyPlanner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" >
     <Grid>
         <Label Content="Daily" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="111" Height="42" FontSize="26"/>
         <Label Content="  Planner" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="111" Height="42" FontSize="26"/>
-        <Rectangle HorizontalAlignment="Left" Height="414" Margin="208,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="20"/>
-        <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="207" Width="193"  SelectedDatesChanged="Calendar_SelectedDatesChanged" />
+        <Rectangle HorizontalAlignment="Left" Height="462" Margin="208,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="8"/>
+        <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="207" Width="193"  SelectedDatesChanged="Calendar_SelectedDatesChanged" Panel.ZIndex="4" />
 
-        <ScrollViewer VerticalScrollBarVisibility="Visible">
-            <StackPanel x:Name="panelForTasks" Margin="236,10,20,10" >
-           
-
-
-            </StackPanel>
+        <Button Content="Dodaj nowe zadanie" HorizontalAlignment="Left" Margin="661,16,0,0" VerticalAlignment="Top" Height="36" Width="119" Click="Button_Click" />
+ 
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0,57,0,0">
+            <StackPanel x:Name="panelForTasks" Margin="224,10,0,10" />
         </ScrollViewer>
+
 
     </Grid>
 </Window>
