@@ -48,11 +48,11 @@
 
 
             <Label Grid.Row="0" Grid.Column="0" Content="Godzina od"/>
-            <TextBox x:Name="txtHourFrom"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap"  VerticalAlignment="Stretch" />
+            <TextBox x:Name="txtHourFrom"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Text="0" TextWrapping="Wrap"  VerticalAlignment="Stretch" />
 
 
             <Label Grid.Row="1" Grid.Column="0" Content="Minuty od"/>
-            <TextBox x:Name="txtMinuteFrom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+            <TextBox x:Name="txtMinuteFrom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
         </Grid>
 
         <Label Grid.Row="4" Grid.Column="0" Content="Godziny i minuty do: " HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" />
@@ -72,11 +72,11 @@
 
 
             <Label Grid.Row="0" Grid.Column="0" Content="Godzina do"/>
-            <TextBox x:Name="txtHourTo" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+            <TextBox x:Name="txtHourTo" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
 
 
             <Label Grid.Row="1" Grid.Column="0" Content="Minuty do"/>
-            <TextBox x:Name="txtMinuteTo" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+            <TextBox x:Name="txtMinuteTo" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Text="0" TextWrapping="Wrap" VerticalAlignment="Stretch" />
         </Grid>
 
 

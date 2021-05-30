@@ -13,9 +13,17 @@
         <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="207" Width="193"  SelectedDatesChanged="Calendar_SelectedDatesChanged" Panel.ZIndex="4" />
 
         <Button Content="Dodaj nowe zadanie" HorizontalAlignment="Left" Margin="661,16,0,0" VerticalAlignment="Top" Height="36" Width="119" Click="Button_Click" />
- 
+
+        <Grid x:Name="copyTasksGrid">
+            <Button Content="Kopiuj zadania na dzien" HorizontalAlignment="Left" Margin="336,11,0,0" VerticalAlignment="Top" Height="36" Width="144" Click="Button_Click_1" />
+            <DatePicker x:Name="currentDatePicker" HorizontalAlignment="Left" Margin="221,19,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Label x:Name="lblNoTasksInfo" Content="Brak zadań w tym dniu" HorizontalAlignment="Left"  Margin="400,167,0,167" Panel.ZIndex="4" FontSize="24" />
+
         <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0,57,0,0">
-            <StackPanel x:Name="panelForTasks" Margin="224,10,0,10" />
+            <StackPanel x:Name="panelForTasks" Margin="224,10,0,10" >
+
+            </StackPanel>
         </ScrollViewer>
 
 

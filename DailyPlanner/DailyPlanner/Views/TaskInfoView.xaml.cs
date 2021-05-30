@@ -20,21 +20,68 @@ namespace DailyPlanner.Views
     /// </summary>
     public partial class TaskInfoView : Window
     {
-        private bool editMode;
-        public TaskInfoView()
+        private bool _editMode;
+        private IList<DateTime> _selectedDates;
+        private Task _currentTask;
+
+        public TaskInfoView(bool isEdit, IList<DateTime> currentSelectedDates,Task currentTask) 
         {
+            _editMode = isEdit;
+            _selectedDates = currentSelectedDates;
+            _currentTask = currentTask;
+
             InitializeComponent();
+            initalizeValuesInControls();
         }
 
-        public TaskInfoView(bool isEdit) 
+        private void initalizeValuesInControls()
         {
-            editMode = isEdit;
-            InitializeComponent();
+            txtTitle.Text = _currentTask.Title;
+            txtHourFrom.Text = _currentTask.HourFrom.ToString();
+            txtMinuteFrom.Text  = _currentTask.MinuteFrom.ToString();
+            txtHourTo.Text = _currentTask.HourTo.ToString(); ;
+            txtMinuteTo.Text = _currentTask.MinuteTo.ToString();
+            txtDescription.Text = _currentTask.Description;
+
+            if(_currentTask.TaskPriority == TaskPriority.Low)
+            {
+                radioLow.IsChecked = true;
+                radioNormal.IsChecked = false;
+                radioHigh.IsChecked = false;
+            }
+            else if(_currentTask.TaskPriority == TaskPriority.Normal)
+            {
+                radioLow.IsChecked = false;
+                radioNormal.IsChecked = true;
+                radioHigh.IsChecked = false;
+            }
+            else
+            {
+                radioLow.IsChecked = false;
+                radioNormal.IsChecked = false;
+                radioHigh.IsChecked = true;
+            }
+
+            chboxKaizedMode.IsEnabled = _currentTask.KaizenMode;
+            
         }
 
         private void btnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Task t = new Task();
+
+            Task t;
+
+
+            if (_editMode)
+            {
+                t = _currentTask;
+            }
+            else
+            {
+                t = new Task();
+            }
+
+
             t.Title = txtTitle.Text;
             t.HourFrom = Convert.ToInt32(txtHourFrom.Text);
             t.MinuteFrom = Convert.ToInt32(txtMinuteFrom.Text);
@@ -44,32 +91,45 @@ namespace DailyPlanner.Views
             t.KaizenMode = chboxKaizedMode.IsEnabled;
             t.Description = txtDescription.Text;
 
-
-            TaskContextSingleton.GetInstance().Context.Tasks.Add(t);
-            TaskContextSingleton.GetInstance().Context.SaveChanges();
-
-
-            TaskCollection taskCollection = TaskContextSingleton.GetInstance().Context.TaskCollections.FirstOrDefault(a => a.DateOfTasks == DateTime.Now);
-            
-            if(taskCollection == null)
+            if(_editMode)
             {
-                TaskCollection tNew = new TaskCollection();
-                tNew.DateOfTasks = DateTime.Now;
-                tNew.Tasks.Add(t);
-
-                TaskContextSingleton.GetInstance().Context.TaskCollections.Add(tNew);
-                TaskContextSingleton.GetInstance().Context.SaveChanges();
+                TaskContextSingleton.GetInstance().Context.Tasks.Update(t);
             }
             else
             {
-                taskCollection.Tasks.Add(t);
-                TaskContextSingleton.GetInstance().Context.SaveChanges();
+                TaskContextSingleton.GetInstance().Context.Tasks.Add(t);
             }
+
+            TaskContextSingleton.GetInstance().Context.SaveChanges();
+
+
+            for (int i = 0; i < _selectedDates.Count; i++)
+            {
+                TaskCollection taskCollection = TaskContextSingleton.GetInstance().Context.TaskCollections.FirstOrDefault(a => a.DateOfTasks.Date == _selectedDates[i].Date);
+
+                if (taskCollection == null)
+                {
+                    TaskCollection tNew = new TaskCollection();
+                    tNew.DateOfTasks = DateTime.Now;
+                    tNew.Tasks.Add(t);
+
+                    TaskContextSingleton.GetInstance().Context.TaskCollections.Add(tNew);
+                }
+                else
+                {
+                    if(!_editMode)
+                    {
+                        taskCollection.Tasks.Add(t);
+                    }
+                }
+
+            }
+
+            TaskContextSingleton.GetInstance().Context.SaveChanges();
 
             MessageBox.Show("Poprawnie zapisano");
 
             this.Close();
-            
         }
 
         private TaskPriority mapTaskPriorityFromRadio()
