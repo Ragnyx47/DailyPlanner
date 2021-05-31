@@ -109,7 +109,7 @@ namespace DailyPlanner
 
                 if (taskCollection != null)
                 {
-                    taskCollection.Tasks.ToList().ForEach(a =>
+                    taskCollection.Tasks.OrderBy(a => a.HourFrom).ThenBy(a => a.MinuteFrom).ToList().ForEach(a =>
                     {
                         wasAnyItemsAdded = true;
                         TaskView g = new TaskView(a,this);
