@@ -24,6 +24,7 @@ namespace DailyPlanner
     public partial class MainWindow : Window
     {
         private IList<DateTime> currentSelectedDates;
+        private bool firstDateSelected;
 
         public MainWindow()
         {
@@ -37,6 +38,12 @@ namespace DailyPlanner
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(!firstDateSelected)
+            {
+                currentSelectedDates.Clear();
+                firstDateSelected = true;
+            }
+
             System.Collections.IList addedItems = e.AddedItems;
             IList<DateTime> selectedDates = new List<DateTime>();
 
@@ -45,10 +52,26 @@ namespace DailyPlanner
                 DateTime dt = (DateTime)addedItems[i];
                 selectedDates.Add(dt);
             }
-            currentSelectedDates = selectedDates;
+
+            System.Collections.IList removedItems = e.RemovedItems;
+            for (int i = 0; i < removedItems.Count; i++)
+            {
+                DateTime dt = (DateTime)removedItems[i];
+                if (currentSelectedDates.Contains(dt))
+                {
+                    currentSelectedDates.Remove(dt);
+                }
+            }
+
+            for (int i = 0; i < selectedDates.Count; i++)
+            {
+                currentSelectedDates.Add(selectedDates[i]);
+            }
+
+            //currentSelectedDates = selectedDates;
             UpdateCalendar();
 
-            // System.Collections.IList removedItems = e.RemovedItems;
+            // 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -101,6 +124,7 @@ namespace DailyPlanner
         {
             panelForTasks.Children.Clear();
             bool wasAnyItemsAdded = false;
+            IList<Task> taskToShow = new List<Task>();
 
             for (int i = 0; i < currentSelectedDates.Count; i++)
             {
@@ -109,6 +133,12 @@ namespace DailyPlanner
 
                 if (taskCollection != null)
                 {
+                    for (int y = 0; y < taskCollection.Tasks.Count; y++)
+                    {
+                        taskToShow.Add(taskCollection.Tasks.ElementAt(y));
+                    }
+
+                    /*
                     taskCollection.Tasks.OrderBy(a => a.HourFrom).ThenBy(a => a.MinuteFrom).ToList().ForEach(a =>
                     {
                         wasAnyItemsAdded = true;
@@ -117,11 +147,23 @@ namespace DailyPlanner
                         fr.Content = g;
                         panelForTasks.Children.Add(fr);
                     });
+                    */
 
                 }
             }
 
-            if(!wasAnyItemsAdded)
+            taskToShow.OrderBy(a => a.HourFrom).ThenBy(a => a.MinuteFrom).ToList().ForEach(a =>
+            {
+                wasAnyItemsAdded = true;
+                TaskView g = new TaskView(a, this);
+                Frame fr = new Frame();
+                fr.Content = g;
+                panelForTasks.Children.Add(fr);
+            });
+
+
+
+            if (!wasAnyItemsAdded)
             {
                 lblNoTasksInfo.Visibility = Visibility.Visible;
                 copyTasksGrid.Visibility = Visibility.Hidden;
