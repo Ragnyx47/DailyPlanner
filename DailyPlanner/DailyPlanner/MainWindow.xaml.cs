@@ -68,10 +68,8 @@ namespace DailyPlanner
                 currentSelectedDates.Add(selectedDates[i]);
             }
 
-            //currentSelectedDates = selectedDates;
             UpdateCalendar();
 
-            // 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -137,18 +135,6 @@ namespace DailyPlanner
                     {
                         taskToShow.Add(taskCollection.Tasks.ElementAt(y));
                     }
-
-                    /*
-                    taskCollection.Tasks.OrderBy(a => a.HourFrom).ThenBy(a => a.MinuteFrom).ToList().ForEach(a =>
-                    {
-                        wasAnyItemsAdded = true;
-                        TaskView g = new TaskView(a,this);
-                        Frame fr = new Frame();
-                        fr.Content = g;
-                        panelForTasks.Children.Add(fr);
-                    });
-                    */
-
                 }
             }
 
