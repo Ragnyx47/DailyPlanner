@@ -228,5 +228,10 @@ namespace DailyPlanner
                 TaskPriority = taskFromDb.TaskPriority
             };
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //PokaGet from database all curent saved tasks
+        }
     }
 }
