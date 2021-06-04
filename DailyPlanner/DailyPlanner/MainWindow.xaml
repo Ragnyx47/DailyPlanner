@@ -13,6 +13,7 @@
         <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="207" Width="193"  SelectedDatesChanged="Calendar_SelectedDatesChanged" Panel.ZIndex="4" SelectionMode="MultipleRange" />
 
         <Button Content="Dodaj nowe zadanie" HorizontalAlignment="Left" Margin="661,16,0,0" VerticalAlignment="Top" Height="36" Width="119" Click="Button_Click" />
+        <Button Content="Pokaż zapisane zadania" HorizontalAlignment="Left" Margin="36,136,0,0" VerticalAlignment="Top" Height="36" Width="119" Click="Button_Click_2"  />
 
         <Grid x:Name="copyTasksGrid">
             <Button Content="Kopiuj zadania na dzien" HorizontalAlignment="Left" Margin="336,11,0,0" VerticalAlignment="Top" Height="36" Width="144" Click="Button_Click_1" />

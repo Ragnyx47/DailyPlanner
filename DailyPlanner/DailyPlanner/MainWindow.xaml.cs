@@ -231,7 +231,7 @@ namespace DailyPlanner
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //PokaGet from database all curent saved tasks
+            //Get from database all curent saved tasks
         }
     }
 }
