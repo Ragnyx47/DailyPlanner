@@ -232,6 +232,8 @@ namespace DailyPlanner
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //Get from database all curent saved tasks
+            NoteTasks noteTaskView = new NoteTasks();
+            noteTaskView.Show();
         }
     }
 }

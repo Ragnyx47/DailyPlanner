@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DailyPlanner.Views"
         mc:Ignorable="d"
-        Title="TaskInfoView" Height="450" Width="800">
+        Title="Zadanie informacje" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -23,7 +23,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="labelTaskInfo" Grid.Column="0" Grid.Row="0" Content="TaskInfoLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="39" Width="140" FontSize="20"/>
+        <Label x:Name="labelTaskInfo" Grid.Column="0" Grid.Row="0" Content="Zadanie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="39" Width="140" FontSize="20"/>
         <Rectangle HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Height="1" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="800"/>
 
         <Button Grid.Column="1" Grid.Row="0" x:Name="btnSaveButton" Content="Zapisz" HorizontalAlignment="Right" Width="63"  Click="btnSaveButton_Click" />

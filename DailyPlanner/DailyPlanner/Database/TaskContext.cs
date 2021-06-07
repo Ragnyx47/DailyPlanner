@@ -9,6 +9,7 @@ namespace DailyPlanner.Database
     public class TaskContext : DbContext
     {
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<NoteTask> NoteTasks { get; set; }
         public DbSet<TaskCollection> TaskCollections { get; set; }
 
         protected override void OnConfiguring(
