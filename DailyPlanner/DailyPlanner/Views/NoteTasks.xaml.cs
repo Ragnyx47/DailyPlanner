@@ -41,7 +41,7 @@ namespace DailyPlanner.Views
             }
 
             lstNoteTasks.Items.Add(new ListBoxItem() { Content = txtAddNote.Text });
-            TaskContextSingleton.GetInstance().Context.NoteTasks.Add(new NoteTask() { Title = txtAddNote.Text });
+            TaskContextSingleton.GetInstance().Context.NoteTasks.Add(new NoteTask() { Title = txtAddNote.Text});
             TaskContextSingleton.GetInstance().Context.SaveChanges();
 
             if(chbRepeatName.IsChecked.Value)

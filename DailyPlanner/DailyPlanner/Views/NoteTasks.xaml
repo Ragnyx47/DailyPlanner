@@ -30,9 +30,10 @@
         </Grid>
 
         <Button Grid.Row="1"  x:Name="btnSelectAllItems" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0" Click="btnSelectAllItems_Click" >Usuń wszystkie elementy</Button>
-        
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
+       
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" Margin="0 0 0 10">
             <ListBox  Name="lstNoteTasks" FontSize="22" SelectionMode="Multiple" >
+                <TextBox Text="dsadadas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="125" ></TextBox>
             </ListBox>
         </ScrollViewer>
     </Grid>
