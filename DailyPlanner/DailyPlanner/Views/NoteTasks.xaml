@@ -33,7 +33,7 @@
        
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" Margin="0 0 0 10">
             <ListBox  Name="lstNoteTasks" FontSize="22" SelectionMode="Multiple" >
-                
+                <ListBoxItem x:Name="firstListItem" MouseDoubleClick="ListBoxItem_MouseDoubleClick" >fsdfsd</ListBoxItem>
             </ListBox>
         </ScrollViewer>
     </Grid>

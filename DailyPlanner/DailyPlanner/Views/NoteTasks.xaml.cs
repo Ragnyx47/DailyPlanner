@@ -20,6 +20,10 @@ namespace DailyPlanner.Views
     /// </summary>
     public partial class NoteTasks : Window
     {
+        private int currentIndexOfTextBoxEdit = 0;
+        private ListBoxItem lastListBoxItem = null;
+        private TextBox lastTextBox = null;
+
         public NoteTasks()
         {
             InitializeComponent();
@@ -93,6 +97,33 @@ namespace DailyPlanner.Views
             TaskContextSingleton.GetInstance().Context.SaveChanges();
             lstNoteTasks.Items.Clear();
 
+        }
+
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int v = lstNoteTasks.Items.IndexOf(firstListItem);
+            currentIndexOfTextBoxEdit = v;
+
+            ListBoxItem firstListItemTemp = new ListBoxItem();
+            firstListItemTemp.Content = firstListItem.Content;
+            lastListBoxItem = firstListItemTemp;
+
+
+            lstNoteTasks.Items.Remove(firstListItem);
+
+            TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString() };
+            textBox.LostFocus += TextBox_LostFocus;
+            lastTextBox = textBox;
+
+            lstNoteTasks.Items.Insert(v, textBox);
+
+            string kfdspo = "fds";
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            lstNoteTasks.Items.RemoveAt(currentIndexOfTextBoxEdit);
+            lstNoteTasks.Items.Insert(currentIndexOfTextBoxEdit, lastListBoxItem);
         }
     }
 }
