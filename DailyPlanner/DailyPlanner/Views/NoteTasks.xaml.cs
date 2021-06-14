@@ -2,6 +2,7 @@
 using DailyPlanner.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,7 +24,7 @@ namespace DailyPlanner.Views
         private int currentIndexOfTextBoxEdit = 0;
         private ListBoxItem lastListBoxItem = null;
         private TextBox lastTextBox = null;
-
+        private bool _isEditing;
         public NoteTasks()
         {
             InitializeComponent();
@@ -111,19 +112,30 @@ namespace DailyPlanner.Views
 
             lstNoteTasks.Items.Remove(firstListItem);
 
-            TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString() };
-            textBox.LostFocus += TextBox_LostFocus;
+            TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString(),Name="tempTextBox" };
+            
             lastTextBox = textBox;
 
             lstNoteTasks.Items.Insert(v, textBox);
+            _isEditing = true;
 
             string kfdspo = "fds";
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            lstNoteTasks.Items.RemoveAt(currentIndexOfTextBoxEdit);
-            lstNoteTasks.Items.Insert(currentIndexOfTextBoxEdit, lastListBoxItem);
+            var mouseWasDownOn = e.Source as FrameworkElement;
+            if (mouseWasDownOn != null)
+            {
+                string elementName = mouseWasDownOn.Name;
+                if(elementName != "tempTextBox" && _isEditing)
+                {
+                    lstNoteTasks.Items.RemoveAt(currentIndexOfTextBoxEdit);
+                    lstNoteTasks.Items.Insert(currentIndexOfTextBoxEdit, lastListBoxItem);
+                    _isEditing = false;
+                }
+            }
         }
     }
 }
