@@ -25,15 +25,25 @@ namespace DailyPlanner.Views
         private ListBoxItem lastListBoxItem = null;
         private TextBox lastTextBox = null;
         private bool _isEditing;
+        
         public NoteTasks()
         {
             InitializeComponent();
         }
 
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var noteTasks = TaskContextSingleton.GetInstance().Context.NoteTasks.ToList();
-            noteTasks.ForEach(a => lstNoteTasks.Items.Add(new ListBoxItem() { Content = a.Title }));
+
+            foreach (var noteTask in noteTasks)
+            {
+                ListBoxItem listBoxItem = new ListBoxItem() { Content = noteTask.Title };
+                listBoxItem.MouseDoubleClick += ItemTempleateMouseDoubleClick;
+
+                lstNoteTasks.Items.Add(listBoxItem);
+            }
             chbRepeatName.IsChecked = true;
         }
 
@@ -45,7 +55,10 @@ namespace DailyPlanner.Views
                 return;
             }
 
-            lstNoteTasks.Items.Add(new ListBoxItem() { Content = txtAddNote.Text });
+            ListBoxItem listBoxItem = new ListBoxItem() { Content = txtAddNote.Text };
+            listBoxItem.MouseDoubleClick += ItemTempleateMouseDoubleClick;
+
+            lstNoteTasks.Items.Add(listBoxItem);
             TaskContextSingleton.GetInstance().Context.NoteTasks.Add(new NoteTask() { Title = txtAddNote.Text});
             TaskContextSingleton.GetInstance().Context.SaveChanges();
 
@@ -122,6 +135,27 @@ namespace DailyPlanner.Views
             string kfdspo = "fds";
         }
 
+        private void ItemTempleateMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int v = lstNoteTasks.Items.IndexOf(firstListItem);
+            currentIndexOfTextBoxEdit = v;
+
+            ListBoxItem firstListItemTemp = new ListBoxItem();
+            firstListItemTemp.Content = firstListItem.Content;
+            lastListBoxItem = firstListItemTemp;
+
+
+            lstNoteTasks.Items.Remove(firstListItem);
+
+            TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString(), Name = "tempTextBox" };
+
+            lastTextBox = textBox;
+
+            lstNoteTasks.Items.Insert(v, textBox);
+            _isEditing = true;
+
+            string kfdspo = "fds";
+        }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
