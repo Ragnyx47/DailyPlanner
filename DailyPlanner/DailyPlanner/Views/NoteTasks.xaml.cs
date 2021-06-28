@@ -131,8 +131,6 @@ namespace DailyPlanner.Views
 
             lstNoteTasks.Items.Insert(v, textBox);
             _isEditing = true;
-
-            string kfdspo = "fds";
         }
 
         private void ItemTempleateMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -153,8 +151,6 @@ namespace DailyPlanner.Views
 
             lstNoteTasks.Items.Insert(v, textBox);
             _isEditing = true;
-
-            string kfdspo = "fds";
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
