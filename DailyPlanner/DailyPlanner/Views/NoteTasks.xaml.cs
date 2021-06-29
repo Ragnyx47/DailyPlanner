@@ -113,37 +113,19 @@ namespace DailyPlanner.Views
 
         }
 
-        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            int v = lstNoteTasks.Items.IndexOf(firstListItem);
-            currentIndexOfTextBoxEdit = v;
-
-            ListBoxItem firstListItemTemp = new ListBoxItem();
-            firstListItemTemp.Content = firstListItem.Content;
-            lastListBoxItem = firstListItemTemp;
-
-
-            lstNoteTasks.Items.Remove(firstListItem);
-
-            TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString(),Name="tempTextBox" };
-            
-            lastTextBox = textBox;
-
-            lstNoteTasks.Items.Insert(v, textBox);
-            _isEditing = true;
-        }
-
         private void ItemTempleateMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int v = lstNoteTasks.Items.IndexOf(firstListItem);
+            ListBoxItem item = (ListBoxItem)sender;
+
+            int v = lstNoteTasks.Items.IndexOf(item);
             currentIndexOfTextBoxEdit = v;
 
             ListBoxItem firstListItemTemp = new ListBoxItem();
-            firstListItemTemp.Content = firstListItem.Content;
+            firstListItemTemp.Content = item.Content;
             lastListBoxItem = firstListItemTemp;
 
 
-            lstNoteTasks.Items.Remove(firstListItem);
+            lstNoteTasks.Items.Remove(item);
 
             TextBox textBox = new TextBox() { Text = firstListItemTemp.Content.ToString(), Name = "tempTextBox" };
 
@@ -161,7 +143,19 @@ namespace DailyPlanner.Views
                 string elementName = mouseWasDownOn.Name;
                 if(elementName != "tempTextBox" && _isEditing)
                 {
+                    //Because there will not be thounsands or even hundrets of those note tasks we can safely use this method
+                    NoteTask noteTask = TaskContextSingleton.GetInstance().Context.NoteTasks.FirstOrDefault(a => a.Title == lastListBoxItem.Content);
+                    if (noteTask != null)
+                    {
+                        noteTask.Title = lastTextBox.Text;
+                        TaskContextSingleton.GetInstance().Context.NoteTasks.Update(noteTask);
+                        TaskContextSingleton.GetInstance().Context.SaveChanges();
+                    }
+
+                    lastListBoxItem.Content = lastTextBox.Text;
+
                     lstNoteTasks.Items.RemoveAt(currentIndexOfTextBoxEdit);
+                    lastListBoxItem.MouseDoubleClick += ItemTempleateMouseDoubleClick;
                     lstNoteTasks.Items.Insert(currentIndexOfTextBoxEdit, lastListBoxItem);
                     _isEditing = false;
                 }
