@@ -26,6 +26,7 @@ namespace DailyPlanner.Models
         public int MinuteTo { get; set; }
 
         public bool KaizenMode { get; set; }
+        public int KaizenModeDays { get; set; }
 
         public TaskPriority TaskPriority { get; set; }
 
